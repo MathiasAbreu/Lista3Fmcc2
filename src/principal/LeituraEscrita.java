@@ -1,11 +1,10 @@
-package br.com;
+package principal;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.management.RuntimeErrorException;
 
 /**
  *
@@ -14,7 +13,7 @@ import javax.management.RuntimeErrorException;
  * @author Mathias Abreu Trajano - mathias.trajano@ccc.ufcg.edu.br
  * 
  */
-public class Input {
+public class LeituraEscrita {
 	
 	public static BufferedImage capturarImagem(String caminhoDaImagem) {
 		
@@ -25,7 +24,7 @@ public class Input {
 		
 		} catch (IOException e) {
 
-			throw new RuntimeException("Erro ao abrir imagem 01!");
+			throw new RuntimeException("Erro ao abrir Imagem: " + caminhoDaImagem + "!");
 			
 		}
 	}
