@@ -2,4 +2,4 @@
 
 cd ..
 cd principal
-javac Principal.java
+javac ClassePrincipal.java

@@ -7,53 +7,17 @@ import java.io.IOException;
 import java.util.Arrays;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 
-public class Principal extends JFrame {
-
-	private static final long serialVersionUID = 1L;
-		
-	private JLabel label;
-
-	public Principal() {
-		
-	}
-
-	public void criarJanela(ImageIcon imagemParaMostrar) {
-		
-		label = new JLabel(imagemParaMostrar);
-		
-		add(label);
-		setSize(imagemParaMostrar.getIconHeight(),imagemParaMostrar.getIconWidth());
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setName("Visualizador do fade");
-		setLocationRelativeTo(this);
-		setVisible(true);
-		
-	}
-	
-	public void atualizaJanela(ImageIcon imagemParaMostrar) {
-		
-		remove(label);
-		label = new JLabel(imagemParaMostrar);
-		add(label);
-		
-		repaint();
-		validate();
-		
-	}
+public class ClassePrincipal {
 	
 	public static void main(String[] args) {
-				
+		
 		System.out.println("Lendo imagens..");
 		
 		BufferedImage imagem01 = capturarImagem("src/input/Imagem02.jpg");
 		BufferedImage imagem02 = capturarImagem("src/input/Imagem01.jpg");
 		
-		System.out.println("Gerando fade..\nO processo pode demorar até 4 minutos..");
-		Principal janelaPrincipal = new Principal();
+		System.out.println("Gerando fade..\nO processo pode demorar ate 4 minutos..");
 		
 		int colunaImagem1 = imagem01.getWidth();
 		int colunaImagem2 = imagem02.getWidth();
@@ -100,18 +64,13 @@ public class Principal extends JFrame {
 			imagem01.setRGB(0, 0, colunaImagem1,linhaImagem1,pixelsImagem1,0,colunaImagem1);
 			escreverNovaImagem(imagem01,String.format("src/output/frame%d.png",interacao));
 			
-			if(interacao == 1)
-				janelaPrincipal.criarJanela(new ImageIcon(imagem01));
-			else
-				janelaPrincipal.atualizaJanela(new ImageIcon(imagem01));
-			
 			interacao ++;
 		}
 		System.out.println("Fade concluido. N° de frames gerados: "+ (interacao - 1));
 	
 	}
 	
-public static BufferedImage capturarImagem(String caminhoDaImagem) {
+	public static BufferedImage capturarImagem(String caminhoDaImagem) {
 		
 		try {
 			
@@ -138,5 +97,3 @@ public static BufferedImage capturarImagem(String caminhoDaImagem) {
 		
 	}
 }
-
-

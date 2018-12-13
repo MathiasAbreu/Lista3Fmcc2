@@ -2,5 +2,4 @@
 
 cd ..
 cd principal
-ls
-java Principal
+java ClassePrincipal
