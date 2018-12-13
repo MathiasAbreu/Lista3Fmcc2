@@ -2,25 +2,21 @@ package principal;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-/**
- *
- * @author Mathias Abreu Trajano - mathias.trajano@ccc.ufcg.edu.br
- * 
- */
-public class Principal extends JFrame{
+public class Principal extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 		
 	private JLabel label;
-	/**
-	 * @param imagem01
-	 */
+
 	public Principal() {
 		
 	}
@@ -30,8 +26,9 @@ public class Principal extends JFrame{
 		label = new JLabel(imagemParaMostrar);
 		
 		add(label);
-		setSize(1000,1000);
+		setSize(imagemParaMostrar.getIconHeight(),imagemParaMostrar.getIconWidth());
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setName("Visualizador do fade");
 		setLocationRelativeTo(this);
 		setVisible(true);
 		
@@ -46,15 +43,14 @@ public class Principal extends JFrame{
 		repaint();
 		validate();
 		
-
 	}
 	
 	public static void main(String[] args) {
-					
+				
 		System.out.println("Lendo imagens..");
 		
-		BufferedImage imagem01 = LeituraEscrita.capturarImagem("src/input/Imagem01.jpg");
-		BufferedImage imagem02 = LeituraEscrita.capturarImagem("src/input/Imagem02.jpg");
+		BufferedImage imagem01 = capturarImagem("src/input/Imagem02.jpg");
+		BufferedImage imagem02 = capturarImagem("src/input/Imagem01.jpg");
 		
 		System.out.println("Gerando fade..\nO processo pode demorar até 4 minutos..");
 		Principal janelaPrincipal = new Principal();
@@ -80,9 +76,9 @@ public class Principal extends JFrame{
 						Color corPixelImagem1 = new Color(imagem01.getRGB(col, lin));
 						Color corPixelImagem2 = new Color(imagem02.getRGB(col, lin));
 						
-						int red = corPixelImagem1.getRed();
+						int red   = corPixelImagem1.getRed();
 						int green = corPixelImagem1.getGreen();
-						int blue = corPixelImagem1.getBlue();
+						int blue  = corPixelImagem1.getBlue();
 						int alpha = corPixelImagem1.getAlpha();
 						
 						if(corPixelImagem1.getRed() != corPixelImagem2.getRed())
@@ -102,7 +98,7 @@ public class Principal extends JFrame{
 				}
 			
 			imagem01.setRGB(0, 0, colunaImagem1,linhaImagem1,pixelsImagem1,0,colunaImagem1);
-			//LeituraEscrita.escreverNovaImagem(imagem01,String.format("src/output/frame%d.png",interacao));
+			escreverNovaImagem(imagem01,String.format("src/output/frame%d.png",interacao));
 			
 			if(interacao == 1)
 				janelaPrincipal.criarJanela(new ImageIcon(imagem01));
@@ -114,4 +110,33 @@ public class Principal extends JFrame{
 		System.out.println("Fade concluido. N° de frames gerados: "+ (interacao - 1));
 	
 	}
+	
+public static BufferedImage capturarImagem(String caminhoDaImagem) {
+		
+		try {
+			
+			BufferedImage imagem = ImageIO.read(new File(caminhoDaImagem));
+			return imagem;
+		
+		} catch (IOException e) {
+
+			throw new RuntimeException("Erro ao abrir Imagem: " + caminhoDaImagem + "!");
+			
+		}
+	}
+
+	public static void escreverNovaImagem(BufferedImage imagem, String caminhoDaImagem) {
+		
+		try {
+			
+			ImageIO.write(imagem, "PNG", new File(caminhoDaImagem));
+			
+		} catch (IOException e ) {
+			
+			throw new RuntimeException("Erro ao gerar imagem do fade");
+		}
+		
+	}
 }
+
+
