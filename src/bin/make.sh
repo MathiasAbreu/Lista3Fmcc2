@@ -1,5 +1,5 @@
 #!/bin/bash
 
 cd ..
-cd src/principal
+cd principal
 javac Principal.java
