@@ -1,4 +1,3 @@
-package principal;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
@@ -14,8 +13,8 @@ public class ClassePrincipal {
 		
 		System.out.println("Lendo imagens..");
 		
-		BufferedImage imagem01 = capturarImagem("src/input/Imagem02.jpg");
-		BufferedImage imagem02 = capturarImagem("src/input/Imagem01.jpg");
+		BufferedImage imagem01 = capturarImagem("input/Imagem02.jpg");
+		BufferedImage imagem02 = capturarImagem("input/Imagem01.jpg");
 		
 		System.out.println("Gerando fade..\nO processo pode demorar ate 4 minutos..");
 		
@@ -62,7 +61,7 @@ public class ClassePrincipal {
 				}
 			
 			imagem01.setRGB(0, 0, colunaImagem1,linhaImagem1,pixelsImagem1,0,colunaImagem1);
-			escreverNovaImagem(imagem01,String.format("src/output/frame%d.png",interacao));
+			escreverNovaImagem(imagem01,String.format("output/frame%d.png",interacao));
 			
 			interacao ++;
 		}

@@ -1,5 +1,6 @@
 #!/bin/bash
 
-cd ..
 ls
+cd ..
+cd principal
 java ClassePrincipal
